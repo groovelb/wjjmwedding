@@ -6,8 +6,8 @@ import circleBg from './circleBg.png';
 
 const Container = styled.div`
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 360px;
+  height: auto;
   padding: 24px 12px;
   font-family: 'Noto Serif KR', serif;
   color: #726a70;
@@ -17,6 +17,10 @@ const Container = styled.div`
   font-weight: 200;
   background-image: url(${paperBg});
   background-size: cover;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const Greeting = styled.p`
