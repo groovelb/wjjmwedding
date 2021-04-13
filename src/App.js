@@ -1,24 +1,224 @@
-import logo from './logo.svg';
+import React from 'react';
+import styled from 'styled-components';
 import './App.css';
+import paperBg from './paper.jpg';
+import circleBg from './circleBg.png';
+
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 24px 12px;
+  font-family: 'Noto Serif KR', serif;
+  color: #726a70;
+  font-size: 14.8px;
+  line-height: 22px;
+  word-break: keep-all;
+  font-weight: 200;
+  background-image: url(${paperBg});
+  background-size: cover;
+`;
+
+const Greeting = styled.p`
+  width: 100%;
+  text-align: center;
+  margin-bottom: 16px;
+`;
+
+const Circle = styled.div`
+  position: relative;
+  width: 100%;
+  padding: 50% 0;
+`;
+
+const CircleBg = styled.div`
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-image: url(${circleBg});
+  background-size: cover;
+  -webkit-animation: rotation 600s infinite linear;
+`;
+
+const PeopleContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top:0;
+  left:0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const People = styled.p`
+  width: 100%;
+  text-align: center;
+  display:flex;
+  ${props => props.index===0?'padding-right: 12px':'padding-left: 12px'};
+  flex-direction: ${props => props.index===0?'row':'row-reverse'};
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 12px;
+  line-height: 44.8px;
+  span.big{
+    margin:0px 8px;
+    font-size: 32px;
+    font-weight: 600;
+  }
+  span.bold{
+    margin:0px 2px;
+    font-weight: 600;
+  }
+`;
+
+const Info = styled.div`
+  width: 100%;
+  padding: 0 64px;
+  display:flex;
+  flex-wrap:wrap;
+  text-align: center;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 600;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  /* margin: 24px 0px; */
+  p{
+    width: 100%;
+    margin: 0px 0px 16px 0px;
+  }
+`;
+
+const Date = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 33%;
+  height: 40px;
+  span{
+    color: #EF9a23;
+    font-weight: 600;
+  }
+  border-left: ${props => props.border?'solid 0.25px #ffb833':'none'};
+  border-right: ${props => props.border?'solid 0.25px #ffb833':'none'};
+`;
+
+const BttContainer = styled.div`
+  /* position: absolute; */
+  padding: 12px 24px;
+  left:0;
+  bottom:0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+const Btt = styled.a`
+  text-decoration: none;
+  width: calc(50% - 8px);
+  height: 48px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: ${props => props.type === 'naver' ? '#fafafa' : '#403838'
+  };
+  background-color: ${props => props.type === 'naver' ? '#3EAF0E' : '#ffe812'
+  };
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`;
+
+const str_greeting = `
+  앞날을 축복하여 주시면 더없는 기쁨으로 간직하겠습니다.
+`;
+
+const str_people = [
+  {
+    f: "김동주",
+    m: "김혜원",
+    g: "우진"
+  },
+  {
+    f: "최영철",
+    m: "이정옥",
+    g: "정문"
+  },
+];
+
+const str_date = `
+  2021년 5월 1일 토요일 오전 11시
+`;
+
+const str_location = `
+  더컨벤션 반포점 . 2층
+`;
+
+const naver_link = 'https://map.naver.com/v5/search/%EB%8D%94%EC%BB%A8%EB%B2%A4%EC%85%98%EB%B0%98%ED%8F%AC/place/1831004045?c=14136708.3012874,4508958.1934571,15,0,0,0,dh';
+const kakao_link = 'https://map.kakao.com/?urlX=499229&urlY=1110976&urlLevel=3&itemId=598171385&q=%EB%8D%94%EC%BB%A8%EB%B2%A4%EC%85%98%20%EB%B0%98%ED%8F%AC%EC%A0%90&srcid=598171385&map_type=TYPE_MAP';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Container>
+      <Greeting>
+        {str_greeting}
+      </Greeting>
+      <Circle>
+        <CircleBg/>
+        <PeopleContainer>
+          {
+            str_people.map((group, i) =>
+              <People index={i}>
+                {i === 1 && '의 차녀'}
+                <span className='bold'>{group.f}</span>.
+                <span className='bold'>{group.m}</span>
+                {i === 0 && '의 장남'}
+                <span className='big'>{group.g}</span>
+              </People>
+            )
+          }
+        </PeopleContainer>
+      </Circle>
+
+      <Info>
+        {/* <p>{str_date}</p> */}
+        <p>{str_location}</p>
+        <Date>
+          2021<br/>
+          <span>5월</span>
+        </Date>
+        <Date border={true}>
+          1일<br/>
+          <span>토</span>
+        </Date>
+        <Date>
+          오전<br/>
+          <span>11시</span>
+        </Date>
+      </Info>
+      <BttContainer>
+        <Btt
+          type='naver'
+          href={naver_link}
+          target={'_blank'}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          네이버 지도보기
+        </Btt>
+        <Btt
+          type='kakao'
+          href={kakao_link}
+          target={'_blank'}
+        >
+          카카오 지도보기
+        </Btt>
+      </BttContainer>
+    </Container>
   );
 }
 
