@@ -3,36 +3,48 @@ import styled from 'styled-components';
 import './App.css';
 import paperBg from './paper.jpg';
 import circleBg from './circleBg.png';
+import img1 from './img1.jpg';
+import img2 from './img2.jpg';
+import imgLeftBottom from './left_bottom.png';
+import imgRightTop from './right_top.png';
+
+
+
+const Wrapper = styled.div`
+  width: 100%;
+  font-family: 'Noto Serif KR', serif;
+  color: #726a70;
+  background-image: url(${paperBg});
+`;
 
 const Container = styled.div`
   position: relative;
   width: 360px;
   height: auto;
   padding: 24px 12px;
-  font-family: 'Noto Serif KR', serif;
-  color: #726a70;
   font-size: 14.8px;
   line-height: 22px;
   word-break: keep-all;
   font-weight: 200;
-  background-image: url(${paperBg});
   background-size: cover;
+  /* padding-bottom: 80px; */
   @media screen and (max-width: 480px) {
     width: 100%;
-    height: 100%;
+    height: auto;
   }
 `;
 
 const Greeting = styled.p`
   width: 100%;
   text-align: center;
-  margin-bottom: 16px;
+  margin: 24px 0px;
 `;
 
 const Circle = styled.div`
   position: relative;
   width: 100%;
   padding: 50% 0;
+  margin-bottom: 24px;
 `;
 
 const CircleBg = styled.div`
@@ -43,7 +55,7 @@ const CircleBg = styled.div`
   height: 100%;
   background-image: url(${circleBg});
   background-size: cover;
-  -webkit-animation: rotation 600s infinite linear;
+  -webkit-animation: rotation 500s infinite linear;
 `;
 
 const PeopleContainer = styled.div`
@@ -62,8 +74,8 @@ const People = styled.p`
   width: 100%;
   text-align: center;
   display:flex;
-  ${props => props.index===0?'padding-right: 12px':'padding-left: 12px'};
-  flex-direction: ${props => props.index===0?'row':'row-reverse'};
+  ${props => props.index === 0 ? 'padding-right: 12px' : 'padding-left: 12px'};
+  flex-direction: ${props => props.index === 0 ? 'row' : 'row-reverse'};
   justify-content: center;
   align-items: flex-end;
   font-size: 12px;
@@ -108,12 +120,46 @@ const Date = styled.div`
     color: #EF9a23;
     font-weight: 600;
   }
-  border-left: ${props => props.border?'solid 0.25px #ffb833':'none'};
-  border-right: ${props => props.border?'solid 0.25px #ffb833':'none'};
+  border-left: ${props => props.border ? 'solid 0.25px #ffb833' : 'none'};
+  border-right: ${props => props.border ? 'solid 0.25px #ffb833' : 'none'};
+`;
+
+const Grid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  /* border-width: 12px 0px;
+  border-style: solid;
+  border-image: linear-gradient(to right, #ffb833ff 0%, #ffb83300 92%);
+  border-image-width: 3px 0 3px 0; 
+  border-image-slice: 1; */
+  /* border-top: solid 2px #ffb833;
+  border-bottom: solid 2px #ffb833; */
+  margin-bottom: 64px;
+`;
+
+const Square = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 32px;
+  span{
+    color: #EF9a23;
+  }
+  img{
+    width: 100%;
+    height: auto;
+  }
+  ${props => props.index===2&&`background-image: url(${imgRightTop});`}
+  ${props => props.index===3&&`background-image: url(${imgLeftBottom});`}
+  background-size: cover;
 `;
 
 const BttContainer = styled.div`
-  /* position: absolute; */
+  /* position: fixed; */
   padding: 12px 24px;
   left:0;
   bottom:0;
@@ -126,7 +172,7 @@ const BttContainer = styled.div`
 const Btt = styled.a`
   text-decoration: none;
   width: calc(50% - 8px);
-  height: 48px;
+  height: 32px;
   border-radius: 2px;
   display: flex;
   flex-direction: row;
@@ -136,7 +182,9 @@ const Btt = styled.a`
   };
   background-color: ${props => props.type === 'naver' ? '#3EAF0E' : '#ffe812'
   };
+  font-size: 12px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.08);
 `;
 
 const str_greeting = `
@@ -169,60 +217,73 @@ const kakao_link = 'https://map.kakao.com/?urlX=499229&urlY=1110976&urlLevel=3&i
 
 function App() {
   return (
-    <Container>
-      <Greeting>
-        {str_greeting}
-      </Greeting>
-      <Circle>
-        <CircleBg/>
-        <PeopleContainer>
-          {
-            str_people.map((group, i) =>
-              <People index={i}>
-                {i === 1 && '의 차녀'}
-                <span className='bold'>{group.f}</span>.
+    <Wrapper>
+      <Container>
+        <Greeting>
+          {str_greeting}
+        </Greeting>
+        <Circle>
+          <CircleBg />
+          <PeopleContainer>
+            {
+              str_people.map((group, i) =>
+                <People index={i}>
+                  {i === 1 && '의 차녀'}
+                  <span className='bold'>{group.f}</span>.
                 <span className='bold'>{group.m}</span>
-                {i === 0 && '의 장남'}
-                <span className='big'>{group.g}</span>
-              </People>
-            )
-          }
-        </PeopleContainer>
-      </Circle>
-
-      <Info>
-        {/* <p>{str_date}</p> */}
-        <p>{str_location}</p>
-        <Date>
-          2021<br/>
-          <span>5월</span>
-        </Date>
-        <Date border={true}>
-          1일<br/>
-          <span>토</span>
-        </Date>
-        <Date>
-          오전<br/>
-          <span>11시</span>
-        </Date>
-      </Info>
-      <BttContainer>
-        <Btt
-          type='naver'
-          href={naver_link}
-          target={'_blank'}
-        >
-          네이버 지도보기
+                  {i === 0 && '의 장남'}
+                  <span className='big'>{group.g}</span>
+                </People>
+              )
+            }
+          </PeopleContainer>
+        </Circle>
+        <Info>
+          {/* <p>{str_date}</p> */}
+          <p>{str_location}</p>
+          <Date>
+            2021<br />
+            <span>5월</span>
+          </Date>
+          <Date border={true}>
+            1일<br />
+            <span>토</span>
+          </Date>
+          <Date>
+            오전<br />
+            <span>11시</span>
+          </Date>
+        </Info>
+      </Container>
+      <Grid>
+        <Square>
+          <img src={img2} alt={''} />
+        </Square>
+        <Square index={2}>W<span>J</span></Square>
+        <Square index={3}><span>J</span>M</Square>
+        <Square>
+          <img src={img1} alt={''} />
+        </Square>
+      </Grid>
+      <Container>
+        <BttContainer>
+          <Btt
+            type='naver'
+            href={naver_link}
+            target={'_blank'}
+          >
+            네이버 지도보기
         </Btt>
-        <Btt
-          type='kakao'
-          href={kakao_link}
-          target={'_blank'}
-        >
-          카카오 지도보기
+          <Btt
+            type='kakao'
+            href={kakao_link}
+            target={'_blank'}
+          >
+            카카오 지도보기
         </Btt>
-      </BttContainer>
-    </Container>
+        </BttContainer>
+      </Container>
+    </Wrapper>
   );
 }
 
