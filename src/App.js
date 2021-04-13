@@ -14,7 +14,13 @@ const Wrapper = styled.div`
   width: 100%;
   font-family: 'Noto Serif KR', serif;
   color: #726a70;
+  width: 360px;
+  height: auto;
   background-image: url(${paperBg});
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const Container = styled.div`
