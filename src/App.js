@@ -51,6 +51,7 @@ const Circle = styled.div`
   width: 100%;
   padding: 50% 0;
   margin-bottom: 24px;
+  overflow: hidden;
 `;
 
 const CircleBg = styled.div`
