@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Preview from '../preview';
 import '../App.css';
 import paperBg from '../paper.jpg';
 import circleBg from '../circleBg.png';
@@ -225,6 +226,10 @@ const kakao_link = 'https://map.kakao.com/?urlX=499229&urlY=1110976&urlLevel=3&i
 function Ver1() {
   return (
     <Wrapper>
+      <Preview
+        title={'우진.정문의 결혼식 5월 1일 오전 11시'}
+        description={'우진.정문의 결혼식 5월 1일 오전 11시'}
+      />
       <Container>
         <Greeting>
           {str_greeting}
