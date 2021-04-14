@@ -14,7 +14,7 @@ function App() {
     <Router>
       <Switch>
         <Route path='/' exact component={Ver1} />
-        <Route path='/ver2' exact component={Ver1} />
+        <Route path='/ver2' exact component={Ver2} />
       </Switch>
     </Router>
   );
