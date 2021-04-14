@@ -227,8 +227,8 @@ function Ver1() {
   return (
     <Wrapper>
       <Preview
-        title={'우진.정문의 결혼식 5월 1일 오전 11시'}
-        description={'우진.정문의 결혼식 5월 1일 오전 11시'}
+        title={'김동주 원장 장남 김우진의 결혼식 5월 1일(토요일) 오전 11시'}
+        description={'김동주 원장 장남 김우진의 결혼식 5월 1일(토요일) 오전 11시'}
       />
       <Container>
         <Greeting>
